@@ -42,61 +42,73 @@ def cadastrar():
 
 
     if (cadastrodivida.checkBox.isChecked()):
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + "','" + valor + "','" + '1' + "','" + StrA + "')")
+        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
+                       "','" + valor + "','" + '1' + "','" + StrA + "')")
         cadastrodivida.checkBox.setChecked(False)
 
     if (cadastrodivida.checkBox_2.isChecked()):
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + "','" + valor + "','" + '2' + "','" + StrA + "')")
+        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
+                       "','" + valor + "','" + '2' + "','" + StrA + "')")
         cadastrodivida.checkBox_2.setChecked(False)
 
 
     if (cadastrodivida.checkBox_3.isChecked()):
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + "','" + valor + "','" + '3' + "','" + StrA + "')")
+        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
+                       "','" + valor + "','" + '3' + "','" + StrA + "')")
         cadastrodivida.checkBox_3.setChecked(False)
 
 
     if (cadastrodivida.checkBox_4.isChecked()):
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + "','" + valor + "','" + '4' + "','" + StrA + "')")
+        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
+                       "','" + valor + "','" + '4' + "','" + StrA + "')")
         cadastrodivida.checkBox_4.setChecked(False)
 
 
     if (cadastrodivida.checkBox_5.isChecked()):
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + "','" + valor + "','" + '5' + "','" + StrA + "')")
+        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data +\
+                       "','" + valor + "','" + '5' + "','" + StrA + "')")
         cadastrodivida.checkBox_5.setChecked(False)
 
 
     if (cadastrodivida.checkBox_6.isChecked()):
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + "','" + valor + "','" + '6' + "','" + StrA + "')")
+        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
+                       "','" + valor + "','" + '6' + "','" + StrA + "')")
         cadastrodivida.checkBox_6.setChecked(False)
 
 
     if (cadastrodivida.checkBox_7.isChecked()):
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + "','" + valor + "','" + '7' + "','" + StrA + "')")
+        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
+                       "','" + valor + "','" + '7' + "','" + StrA + "')")
         cadastrodivida.checkBox_7.setChecked(False)
 
 
     if (cadastrodivida.checkBox_8.isChecked()):
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + "','" + valor + "','" + '8' + "','" + StrA + "')")
+        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
+                       "','" + valor + "','" + '8' + "','" + StrA + "')")
         cadastrodivida.checkBox_8.setChecked(False)
 
 
     if (cadastrodivida.checkBox_9.isChecked()):
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + "','" + valor + "','" + '9' + "','" + StrA + "')")
+        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
+                       "','" + valor + "','" + '9' + "','" + StrA + "')")
         cadastrodivida.checkBox_9.setChecked(False)
 
 
     if (cadastrodivida.checkBox_10.isChecked()):
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + "','" + valor + "','" + '10' + "','" + StrA + "')")
+        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
+                       "','" + valor + "','" + '10' + "','" + StrA + "')")
         cadastrodivida.checkBox_10.setChecked(False)
 
 
     if (cadastrodivida.checkBox_11.isChecked()):
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + "','" + valor + "','" + '11' + "','" + StrA + "')")
+        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
+                       "','" + valor + "','" + '11' + "','" + StrA + "')")
         cadastrodivida.checkBox_11.setChecked(False)
 
 
     if (cadastrodivida.checkBox_12.isChecked()):
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + "','" + valor + "','" + '12' + "','" + StrA + "')")
+        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
+                       "','" + valor + "','" + '12' + "','" + StrA + "')")
         cadastrodivida.checkBox_12.setChecked(False)
         cadastrodivida.checkBox_13.setChecked(False)
 
@@ -126,17 +138,6 @@ def execbombobox2():
         cadastrarc.comboBox.addItem(bancof)
         i += 1
 
-def painel():
-    execbombobox()
-    paineldecontrole.close()
-    cadastrodivida.show()
-
-def sair():
-    cadastrodivida.close()
-    paineldecontrole.show()
-
-def sair_2():
-    paineldecontrole.close()
 
 def cadastrob():
     cadastrobanco.show()
@@ -162,7 +163,8 @@ def cadastrarbanco():
     limitecredito = cadastrobanco.lineEdit_2.text()
 
     if(cadastrobanco.radioButton_3.isChecked()):
-        cursor3.execute("insert into contabanco (nomebanco, debito, credito, limitecredito) values ('" + nomeb + "','" +debito + "','" + credito + "','" + limitecredito + "')")
+        cursor3.execute("insert into contabanco (nomebanco, debito, credito, limitecredito) values ('" + nomeb + "','" + \
+                        debito + "','" + credito + "','" + limitecredito + "')")
         cadastrobanco.lineEdit.setText("")
         # cadastrobanco.radioButton.setChecked(False)
         # cadastrobanco.radioButton_2.setChecked(False)
@@ -175,7 +177,8 @@ def cadastrarbanco():
 
 
     elif(cadastrobanco.radioButton_4.isChecked()):
-        cursor3.execute("insert into contabanco (nomebanco, debito, credito, limitecredito) values ('" + nomeb + "','" +debito + "','" + credito + "', null" + ")")
+        cursor3.execute("insert into contabanco (nomebanco, debito, credito, limitecredito) values ('" + nomeb + "','" + \
+                        debito + "','" + credito + "', null" + ")")
         cadastrobanco.lineEdit.setText("")
         # cadastrobanco.radioButton.setChecked(False)
         # cadastrobanco.radioButton_2.setChecked(False)
@@ -189,8 +192,10 @@ def cadastrarbanco():
         print("erro")
     banco.commit()
 
-def fecharcadastrobanco():
-    cadastrobanco.close()
+def painel():
+    execbombobox()
+    paineldecontrole.close()
+    cadastrodivida.show()
 
 def gerenciarbancos():
     listarbancos.show()
@@ -270,7 +275,9 @@ def cadastrarcompras():
         idmes = cursor.fetchall()
         idmes = str(idmes[0][0])
 
-        cursor.execute("insert into cartaofatura (idbanco, produtoservico, data, valor, nparcelas, idmes) values ('" + idbanco + "','" + descricao + "','" + datatex + "','" + valorparcela + "','" + parcela01 + "','" + idmes + "')")
+        cursor.execute("insert into cartaofatura (idbanco, produtoservico, data, valor, nparcelas, idmes) values ('" + \
+                       idbanco + "','" + descricao + "','" + datatex + "','" + valorparcela + "','" + parcela01 + "','"\
+                       + idmes + "')")
 
         if x < 12:
             x+=1
@@ -285,6 +292,25 @@ def cadastrarcompras():
 
     banco.commit()
 
+
+def sair():
+    cadastrodivida.comboBox.clear()
+    cadastrodivida.close()
+    paineldecontrole.show()
+
+
+def sair_2():
+    paineldecontrole.comboBox.clear()
+    paineldecontrole.close()
+
+
+def fecharcadastrobanco():
+    cadastrobanco.close()
+
+
+def fecharcadastrarcompras():
+    cadastrarc.comboBox.clear()
+    cadastrarc.close()
 
 app = QtWidgets.QApplication([])
 
@@ -306,6 +332,7 @@ listarbancos.pushButton.clicked.connect(excluirbanco)
 paineldecontrole.pushButton_12.clicked.connect(showcadastrarcompras)
 
 cadastrarc.pushButton.clicked.connect(cadastrarcompras)
+cadastrarc.pushButton_2.clicked.connect(fecharcadastrarcompras)
 
 
 paineldecontrole.show()
