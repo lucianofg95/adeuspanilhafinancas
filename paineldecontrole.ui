@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Controle Manual de Finanças para Pessoa Física</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(32, 178, 170);</string>

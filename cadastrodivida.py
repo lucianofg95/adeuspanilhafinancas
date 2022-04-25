@@ -10,6 +10,7 @@ banco = mysql.connector.connect(
     database="financaspessoais"
 )
 
+
 def selecionartodos():
 
         cadastrodivida.checkBox.setChecked(True)
@@ -260,7 +261,7 @@ def cadastrarcompras():
     valor = cadastrarc.lineEdit_3.text()
     parcela01 = cadastrarc.lineEdit_4.text()
     parcela = int(cadastrarc.lineEdit_4.text()) + int(data.month)
-    valorparcela = str(int(valor) / int(parcela))
+    valorparcela = str(int(valor) / int(parcela01))
     parcelames = int(data.month)
 
     # sistema de repetição para percorrer os meses e anos das parcelas divididas a partir da data da compra:
@@ -300,7 +301,6 @@ def sair():
 
 
 def sair_2():
-    paineldecontrole.comboBox.clear()
     paineldecontrole.close()
 
 
