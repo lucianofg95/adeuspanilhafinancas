@@ -1,6 +1,6 @@
 from PyQt5 import uic, QtWidgets
 import mysql.connector
-from datetime import datetime
+from datetime import datetime, date
 from PyQt5.QtWidgets import QMessageBox
 
 banco = mysql.connector.connect(
@@ -9,6 +9,8 @@ banco = mysql.connector.connect(
     passwd="123456",
     database="financaspessoais"
 )
+
+
 
 def selecionartodos():
 
@@ -28,8 +30,8 @@ def selecionartodos():
 
 
 def cadastrar():
-
     cursor = banco.cursor()
+    insertYearBD()
     x = cadastrodivida.comboBox.currentText()
     cursor.execute("select id from contabanco where nomebanco = '" + x + "'")
     StrA = cursor.fetchall()
@@ -42,6 +44,7 @@ def cadastrar():
 
 
     if (cadastrodivida.checkBox.isChecked()):
+
         cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
                        "','" + valor + "','" + '1' + "','" + StrA + "')")
         cadastrodivida.checkBox.setChecked(False)
@@ -193,9 +196,13 @@ def cadastrarbanco():
     banco.commit()
 
 def painel():
-    execbombobox()
-    paineldecontrole.close()
     cadastrodivida.show()
+    cadastrodivida.label_Ano.setText(paineldecontrole.lineEditAno.text())
+    insertYearBD()
+    execbombobox()
+
+
+
 
 def gerenciarbancos():
     listarbancos.show()
@@ -244,11 +251,14 @@ def excluirbanco():
 
 def showcadastrarcompras():
     cadastrarc.show()
+    cadastrarc.label_Ano.setText(paineldecontrole.lineEditAno.text())
+    insertYearBD()
     execbombobox2()
 
 
 def cadastrarcompras():
     cursor = banco.cursor()
+    insertYearBD()
     nomebanco = cadastrarc.comboBox.currentText()
     cursor.execute("select id from contabanco where nomebanco = '" + nomebanco + "'")
     idb = cursor.fetchall()
@@ -260,15 +270,16 @@ def cadastrarcompras():
     valor = cadastrarc.lineEdit_3.text()
     parcela01 = cadastrarc.lineEdit_4.text()
     parcela = int(cadastrarc.lineEdit_4.text()) + int(data.month)
-    valorparcela = str(int(valor) / int(parcela))
+    valorparcela = str(int(valor) / int(parcela01))
     parcelames = int(data.month)
 
     # sistema de repetição para percorrer os meses e anos das parcelas divididas a partir da data da compra:
     x = int(data.month) + 1       # começa a contar um mês após o mês da data cadastrada
-    y = int(data.year)            # ano da data cadastrada
+    y = cadastrarc.label_Ano.text()        # ano da data cadastrada
+
     while parcelames < parcela:
 
-        cursor.execute("select idano from ano where numeroano = " + str(y))
+        cursor.execute("select idano from ano where numeroano = " + y)
         idano = cursor.fetchall()
         idano = idano[0][0]
         cursor.execute("select id from mes where numero = " + str(x) + " and  idano = " + str(idano))
@@ -312,6 +323,45 @@ def fecharcadastrarcompras():
     cadastrarc.comboBox.clear()
     cadastrarc.close()
 
+
+def insertYearBD():
+    cursor = banco.cursor()
+    year = paineldecontrole.lineEditAno.text()
+    cursor.execute("select numeroano from ano where numeroano = " + str(year))
+    ano = cursor.fetchall()
+
+    if (ano == []):
+        cursor.execute("insert into ano(numeroano) values ('" + year + "')")
+        banco.commit()
+
+        cursor.execute("select idano from ano where numeroano = " + str(year))
+        idano = cursor.fetchall()
+        idano = idano[0][0]
+
+        print(idano)
+
+        cursor.execute("insert into mes(nome, numero, idano) values ('janeiro', '1', '" + str(idano) + "'),\
+        ('fevereiro', '2', '" + str(idano) + "'),\
+        ('março', '3', '" + str(idano) + "'),\
+        ('abril', '4', '" + str(idano) + "'),\
+        ('maio', '5', '" + str(idano) + "'),\
+        ('junho', '6', '" + str(idano) + "'),\
+        ('julho', '7', '" + str(idano) + "'),\
+        ('agosto', '8', '" + str(idano) + "'),\
+        ('setembro', '9', '" + str(idano) + "'),\
+        ('outubro', '10', '" + str(idano) + "'),\
+        ('novembro', '11', '" + str(idano) + "'),\
+        ('dezembro', '12', '" + str(idano) + "')")
+
+        banco.commit()
+
+
+    else:
+        print("Ano já está inserido no banco de dados")
+
+
+
+
 app = QtWidgets.QApplication([])
 
 cadastrodivida = uic.loadUi("cadastrodivida.ui")
@@ -336,4 +386,9 @@ cadastrarc.pushButton_2.clicked.connect(fecharcadastrarcompras)
 
 
 paineldecontrole.show()
+today = date.today()
+year = today.strftime("%Y")
+paineldecontrole.lineEditAno.setText(year)
+insertYearBD()
+
 app.exec()

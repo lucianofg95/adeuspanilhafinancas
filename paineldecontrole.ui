@@ -20,9 +20,9 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>10</y>
-      <width>491</width>
+      <x>110</x>
+      <y>-10</y>
+      <width>331</width>
       <height>71</height>
      </rect>
     </property>
@@ -66,7 +66,7 @@ border-style: outset;
 border-width: 2px;</string>
     </property>
     <property name="text">
-     <string>CADASTRAR DISPESA</string>
+     <string>CADASTRAR DESPESA</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
@@ -178,6 +178,49 @@ border-width: 2px;</string>
      <string>CADASTRAR COMPRAS</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>60</y>
+      <width>41</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>ANO:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEditAno">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>70</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -185,7 +228,7 @@ border-width: 2px;</string>
      <x>0</x>
      <y>0</y>
      <width>550</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
