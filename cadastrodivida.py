@@ -2,6 +2,7 @@ from PyQt5 import uic, QtWidgets
 import mysql.connector
 from datetime import datetime, date
 from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtCore import QDate, Qt
 
 banco = mysql.connector.connect(
     host="localhost",
@@ -13,150 +14,62 @@ banco = mysql.connector.connect(
 
 def selecionartodos():
 
-        cadastrodivida.checkBox.setChecked(True)
-        cadastrodivida.checkBox_2.setChecked(True)
-        cadastrodivida.checkBox_3.setChecked(True)
-        cadastrodivida.checkBox_4.setChecked(True)
-        cadastrodivida.checkBox_5.setChecked(True)
-        cadastrodivida.checkBox_6.setChecked(True)
-        cadastrodivida.checkBox_7.setChecked(True)
-        cadastrodivida.checkBox_8.setChecked(True)
-        cadastrodivida.checkBox_9.setChecked(True)
-        cadastrodivida.checkBox_10.setChecked(True)
-        cadastrodivida.checkBox_11.setChecked(True)
-        cadastrodivida.checkBox_12.setChecked(True)
+        cadastro_despesa.checkBox.setChecked(True)
+        cadastro_despesa.checkBox_2.setChecked(True)
+        cadastro_despesa.checkBox_3.setChecked(True)
+        cadastro_despesa.checkBox_4.setChecked(True)
+        cadastro_despesa.checkBox_5.setChecked(True)
+        cadastro_despesa.checkBox_6.setChecked(True)
+        cadastro_despesa.checkBox_7.setChecked(True)
+        cadastro_despesa.checkBox_8.setChecked(True)
+        cadastro_despesa.checkBox_9.setChecked(True)
+        cadastro_despesa.checkBox_10.setChecked(True)
+        cadastro_despesa.checkBox_11.setChecked(True)
+        cadastro_despesa.checkBox_12.setChecked(True)
 
 
-def cadastrar():
-    cursor = banco.cursor()
-    x = cadastrodivida.comboBox.currentText()
-    cursor.execute("select id from contabanco where nomebanco = '" + x + "'")
-    StrA = cursor.fetchall()
-    StrA = (str(StrA).strip('[]'',''()'))
-    nome = cadastrodivida.lineEdit.text()
-    datatext = cadastrodivida.lineEdit_2.text()
-    valor = cadastrodivida.lineEdit_3.text()
-    data = str(datetime.strptime(datatext, "%d/%m/%Y").date())
+def cadastrar_despesa():
+    # Obtenha o cursor usando uma declaração with
+    with banco.cursor() as cursor:
+        nome_banco = cadastro_despesa.comboBox.currentText()
+        cursor.execute("select id from contabanco where nomebanco = %s", (nome_banco,))
+        x = cursor.fetchone()[0]
+        nome = cadastro_despesa.lineEdit.text()
+        data_texto = cadastro_despesa.dateEdit.text()
+        valor = cadastro_despesa.lineEdit_3.text()
+        data = str(datetime.strptime(data_texto, "%d/%m/%Y").date())
+        y = cadastro_despesa.label_Ano.text()
+        cursor.execute("select idano from ano where numeroano = %s", (y,))
+        idano = cursor.fetchone()[0]
 
-    y = cadastrodivida.label_Ano.text()  # ano selecionado pelo usuário
+        meses = {
+            "1": cadastro_despesa.checkBox,
+            "2": cadastro_despesa.checkBox_2,
+            "3": cadastro_despesa.checkBox_3,
+            "4": cadastro_despesa.checkBox_4,
+            "5": cadastro_despesa.checkBox_5,
+            "6": cadastro_despesa.checkBox_6,
+            "7": cadastro_despesa.checkBox_7,
+            "8": cadastro_despesa.checkBox_8,
+            "9": cadastro_despesa.checkBox_9,
+            "10": cadastro_despesa.checkBox_10,
+            "11": cadastro_despesa.checkBox_11,
+            "12": cadastro_despesa.checkBox_12,
+        }
 
-    cursor.execute("select idano from ano where numeroano = " + y)
-    idano = cursor.fetchall()
-    idano = idano[0][0]
+        for mes_numero, mes_checkbox in meses.items():
+            if mes_checkbox.isChecked():
+                cursor.execute("select id from mes where numero = %s and idano = %s", (mes_numero, idano))
+                idmes = cursor.fetchone()[0]
+                cursor.execute("insert into dividafixa (nome, data, valor, idmes, idconta) values (%s, %s, %s, %s, %s)",
+                               (nome, data, valor, idmes, x))
+            mes_checkbox.setChecked(False)
 
-    if (cadastrodivida.checkBox.isChecked()):
-        cursor.execute("select id from mes where numero = '1' and  idano = " + str(idano))
-        idmes = cursor.fetchall()
-        idmes = str(idmes[0][0])
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
-                       "','" + valor + "','" + idmes + "','" + StrA + "')")
-        cadastrodivida.checkBox.setChecked(False)
+        banco.commit()
+        cadastro_despesa.lineEdit.setText("")
+        cadastro_despesa.lineEdit_3.setText("")
+        cadastro_despesa.dateEdit.setDate(QDate.currentDate())
 
-    if (cadastrodivida.checkBox_2.isChecked()):
-        cursor.execute("select id from mes where numero = 2 and  idano = " + str(idano))
-        idmes = cursor.fetchall()
-        idmes = str(idmes[0][0])
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
-                       "','" + valor + "','" + idmes + "','" + StrA + "')")
-        cadastrodivida.checkBox_2.setChecked(False)
-
-
-    if (cadastrodivida.checkBox_3.isChecked()):
-        cursor.execute("select id from mes where numero = 3 and  idano = " + str(idano))
-        idmes = cursor.fetchall()
-        idmes = str(idmes[0][0])
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
-                       "','" + valor + "','" + idmes + "','" + StrA + "')")
-        cadastrodivida.checkBox_3.setChecked(False)
-
-
-    if (cadastrodivida.checkBox_4.isChecked()):
-        cursor.execute("select id from mes where numero = 4 and  idano = " + str(idano))
-        idmes = cursor.fetchall()
-        idmes = str(idmes[0][0])
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
-                       "','" + valor + "','" + idmes + "','" + StrA + "')")
-        cadastrodivida.checkBox_4.setChecked(False)
-
-
-    if (cadastrodivida.checkBox_5.isChecked()):
-        cursor.execute("select id from mes where numero = 5 and  idano = " + str(idano))
-        idmes = cursor.fetchall()
-        idmes = str(idmes[0][0])
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data +\
-                       "','" + valor + "','" + idmes + "','" + StrA + "')")
-        cadastrodivida.checkBox_5.setChecked(False)
-
-
-    if (cadastrodivida.checkBox_6.isChecked()):
-        cursor.execute("select id from mes where numero = 6 and  idano = " + str(idano))
-        idmes = cursor.fetchall()
-        idmes = str(idmes[0][0])
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
-                       "','" + valor + "','" + idmes + "','" + StrA + "')")
-        cadastrodivida.checkBox_6.setChecked(False)
-
-
-    if (cadastrodivida.checkBox_7.isChecked()):
-        cursor.execute("select id from mes where numero = 7 and  idano = " + str(idano))
-        idmes = cursor.fetchall()
-        idmes = str(idmes[0][0])
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
-                       "','" + valor + "','" + idmes + "','" + StrA + "')")
-        cadastrodivida.checkBox_7.setChecked(False)
-
-
-    if (cadastrodivida.checkBox_8.isChecked()):
-        cursor.execute("select id from mes where numero = 8 and  idano = " + str(idano))
-        idmes = cursor.fetchall()
-        idmes = str(idmes[0][0])
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
-                       "','" + valor + "','" + idmes + "','" + StrA + "')")
-        cadastrodivida.checkBox_8.setChecked(False)
-
-
-    if (cadastrodivida.checkBox_9.isChecked()):
-        cursor.execute("select id from mes where numero = 9 and  idano = " + str(idano))
-        idmes = cursor.fetchall()
-        idmes = str(idmes[0][0])
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
-                       "','" + valor + "','" + idmes + "','" + StrA + "')")
-        cadastrodivida.checkBox_9.setChecked(False)
-
-
-    if (cadastrodivida.checkBox_10.isChecked()):
-        cursor.execute("select id from mes where numero = 10 and  idano = " + str(idano))
-        idmes = cursor.fetchall()
-        idmes = str(idmes[0][0])
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
-                       "','" + valor + "','" + idmes + "','" + StrA + "')")
-        cadastrodivida.checkBox_10.setChecked(False)
-
-
-    if (cadastrodivida.checkBox_11.isChecked()):
-        cursor.execute("select id from mes where numero = 11 and  idano = " + str(idano))
-        idmes = cursor.fetchall()
-        idmes = str(idmes[0][0])
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
-                       "','" + valor + "','" + idmes + "','" + StrA + "')")
-        cadastrodivida.checkBox_11.setChecked(False)
-
-
-    if (cadastrodivida.checkBox_12.isChecked()):
-        cursor.execute("select id from mes where numero = 12 and  idano = " + str(idano))
-        idmes = cursor.fetchall()
-        idmes = str(idmes[0][0])
-        cursor.execute("insert into dividafixa (nome,data, valor, idmes, idconta) values ('" + nome + "','" + data + \
-                       "','" + valor + "','" + idmes + "','" + StrA + "')")
-        cadastrodivida.checkBox_12.setChecked(False)
-        cadastrodivida.checkBox_13.setChecked(False)
-
-    banco.commit()
-    # banco.close()
-
-    cadastrodivida.lineEdit.setText("")
-    cadastrodivida.lineEdit_2.setText("")
-    cadastrodivida.lineEdit_3.setText("")
 
 
 def execbombobox():
@@ -165,7 +78,7 @@ def execbombobox():
     bancos = cursor1.fetchall()
     for i in range(len(bancos)):
         bancof = bancos[i][0]
-        cadastrodivida.comboBox.addItem(bancof)
+        cadastro_despesa.comboBox.addItem(bancof)
         i += 1
 
 
@@ -229,10 +142,11 @@ def cadastrarbanco():
     banco.commit()
 
 def painel():
-    cadastrodivida.show()
-    cadastrodivida.label_Ano.setText(paineldecontrole.lineEditAno.text())
+    cadastro_despesa.show()
+    cadastro_despesa.label_Ano.setText(paineldecontrole.lineEditAno.text())
     insertYearBD()
     execbombobox()
+    cadastro_despesa.dateEdit.setDate(QDate.currentDate())
 
 
 def gerenciarbancos():
@@ -334,8 +248,8 @@ def cadastrarcompras():
 
 
 def sair():
-    cadastrodivida.comboBox.clear()
-    cadastrodivida.close()
+    cadastro_despesa.comboBox.clear()
+    cadastro_despesa.close()
     paineldecontrole.show()
 
 
@@ -385,17 +299,21 @@ def insertYearBD():
     else:
         print("Ano já está inserido no banco de dados")
 
+def mais1():
+    f = int(cadastrar_despesa.lineEdit_3.text())+1
+    cadastro_despesa.lineEdit_3.setText(f)
+
 app = QtWidgets.QApplication([])
 
-cadastrodivida = uic.loadUi("cadastrodivida.ui")
+cadastro_despesa = uic.loadUi("cadastrodivida.ui")
 paineldecontrole = uic.loadUi("paineldecontrole.ui")
 cadastrobanco = uic.loadUi("cadastrobanco.ui")
 listarbancos = uic.loadUi("listarbancos.ui")
 cadastrarc = uic.loadUi("cadastarcompras.ui")
 paineldecontrole.pushButton_11.clicked.connect(painel)
-cadastrodivida.pushButton.clicked.connect(cadastrar)
-cadastrodivida.checkBox_13.clicked.connect(selecionartodos)
-cadastrodivida.pushButton_2.clicked.connect(sair)
+cadastro_despesa.pushButton.clicked.connect(cadastrar_despesa)
+cadastro_despesa.checkBox_13.clicked.connect(selecionartodos)
+cadastro_despesa.pushButton_2.clicked.connect(sair)
 paineldecontrole.pushButton_2.clicked.connect(cadastrob)
 paineldecontrole.pushButton_4.clicked.connect(sair_2)
 cadastrobanco.pushButton.clicked.connect(cadastrarbanco)
@@ -403,6 +321,7 @@ cadastrobanco.pushButton_2.clicked.connect(fecharcadastrobanco)
 cadastrobanco.pushButton_3.clicked.connect(gerenciarbancos)
 listarbancos.pushButton.clicked.connect(excluirbanco)
 paineldecontrole.pushButton_12.clicked.connect(showcadastrarcompras)
+cadastro_despesa.pushButton_3.clicked.connect(mais1)
 
 cadastrarc.pushButton.clicked.connect(cadastrarcompras)
 cadastrarc.pushButton_2.clicked.connect(fecharcadastrarcompras)
@@ -415,3 +334,21 @@ paineldecontrole.lineEditAno.setText(year)
 insertYearBD()
 
 app.exec()
+
+
+
+
+# def insert_year_bd(cursor):
+#     ano = cadastrarc.label_Ano.text()
+#     cursor.execute("INSERT IGNORE INTO ano (numeroano) VALUES (%s)", (ano,))
+#
+#
+# def obter_id_banco(cursor, nome_banco):
+#     cursor.execute("SELECT id FROM contabanco WHERE nomebanco = %s", (nome_banco,))
+#     return cursor.fetchone()[0]
+#
+#
+# def obter_id_mes(cursor, numero_mes, ano):
+#     cursor.execute("SELECT id FROM mes WHERE numero = %s AND idano = (SELECT idano FROM ano WHERE numeroano = %s)",
+#                    (numero_mes, ano))
+#     return cursor.fetchone()[0]

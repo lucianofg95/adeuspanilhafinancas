@@ -61,17 +61,28 @@
       <x>110</x>
       <y>0</y>
       <width>341</width>
-      <height>41</height>
+      <height>51</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Arial</family>
-      <pointsize>22</pointsize>
+      <family>Ubuntu,sans-serif</family>
+      <pointsize>-1</pointsize>
+      <weight>87</weight>
+      <italic>false</italic>
+      <bold>true</bold>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(85, 0, 0);</string>
+     <string notr="true">    font: 100%/1.4 Lato, sans-serif;
+    color: #333;
+    box-sizing: inherit;
+    font-family: Ubuntu, sans-serif;
+    font-weight: 700;
+    line-height: 1;
+    font-size: 26px;
+    margin: .7em 0 .2em;
+    clear: both;</string>
     </property>
     <property name="text">
      <string>CADASTRAR COMPRAS</string>
