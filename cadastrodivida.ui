@@ -14,31 +14,9 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(170, 255, 255);</string>
+   <string notr="true">background-color: rgb(32, 178, 170);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>-10</y>
-      <width>391</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Arial</family>
-      <pointsize>22</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(85, 0, 0);</string>
-    </property>
-    <property name="text">
-     <string>Cadastro de Dívida / Despesa</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
@@ -497,11 +475,89 @@ color: rgb(255, 255, 255);</string>
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_6">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>180</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: qlineargradient(spread:pad, x1:0.504, y1:0, x2:0.504, y2:0.981, stop:0 rgba(85, 0, 255, 255), stop:1 rgba(255, 0, 0, 255));
+    color: rgb(255, 255, 255);
+    border-radius: 15px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(0, 0, 0);
+}
+
+QPushButton:hover {
+    background-color: qlineargradient(spread:pad, x1:0.504, y1:0, x2:0.504, y2:0.981, stop:0 rgba(85, 0, 255, 255), stop:1 rgba(200, 0, 0, 255));
+}
+
+QPushButton:pressed {
+    background-color: qlineargradient(spread:pad, x1:0.504, y1:0, x2:0.504, y2:0.981, stop:0 rgba(85, 0, 255, 255), stop:1 rgba(150, 0, 0, 255));
+}
+</string>
+    </property>
+    <property name="text">
+     <string>+1000</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_5">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>180</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: qlineargradient(spread:pad, x1:0.504, y1:0, x2:0.504, y2:0.981, stop:0 rgba(85, 0, 255, 255), stop:1 rgba(255, 0, 0, 255));
+    color: rgb(255, 255, 255);
+    border-radius: 15px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(0, 0, 0);
+}
+
+QPushButton:hover {
+    background-color: qlineargradient(spread:pad, x1:0.504, y1:0, x2:0.504, y2:0.981, stop:0 rgba(85, 0, 255, 255), stop:1 rgba(200, 0, 0, 255));
+}
+
+QPushButton:pressed {
+    background-color: qlineargradient(spread:pad, x1:0.504, y1:0, x2:0.504, y2:0.981, stop:0 rgba(85, 0, 255, 255), stop:1 rgba(150, 0, 0, 255));
+}
+</string>
+    </property>
+    <property name="text">
+     <string>+100</string>
+    </property>
+   </widget>
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
       <x>330</x>
-      <y>179</y>
+      <y>180</y>
       <width>31</width>
       <height>31</height>
      </rect>
@@ -514,9 +570,23 @@ color: rgb(255, 255, 255);</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(85, 0, 255);
-background-color: rgb(255, 0, 0);
-color: rgb(255, 255, 255);</string>
+     <string notr="true">QPushButton {
+    background-color: qlineargradient(spread:pad, x1:0.504, y1:0, x2:0.504, y2:0.981, stop:0 rgba(85, 0, 255, 255), stop:1 rgba(255, 0, 0, 255));
+    color: rgb(255, 255, 255);
+    border-radius: 15px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(0, 0, 0);
+}
+
+QPushButton:hover {
+    background-color: qlineargradient(spread:pad, x1:0.504, y1:0, x2:0.504, y2:0.981, stop:0 rgba(85, 0, 255, 255), stop:1 rgba(200, 0, 0, 255));
+}
+
+QPushButton:pressed {
+    background-color: qlineargradient(spread:pad, x1:0.504, y1:0, x2:0.504, y2:0.981, stop:0 rgba(85, 0, 255, 255), stop:1 rgba(150, 0, 0, 255));
+}
+</string>
     </property>
     <property name="text">
      <string>+1</string>
@@ -526,7 +596,7 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>370</x>
-      <y>179</y>
+      <y>180</y>
       <width>41</width>
       <height>31</height>
      </rect>
@@ -539,62 +609,67 @@ color: rgb(255, 255, 255);</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(85, 0, 255);
-background-color: rgb(255, 0, 0);
-color: rgb(255, 255, 255);</string>
+     <string notr="true">QPushButton {
+    background-color: qlineargradient(spread:pad, x1:0.504, y1:0, x2:0.504, y2:0.981, stop:0 rgba(85, 0, 255, 255), stop:1 rgba(255, 0, 0, 255));
+    color: rgb(255, 255, 255);
+    border-radius: 15px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(0, 0, 0);
+}
+
+QPushButton:hover {
+    background-color: qlineargradient(spread:pad, x1:0.504, y1:0, x2:0.504, y2:0.981, stop:0 rgba(85, 0, 255, 255), stop:1 rgba(200, 0, 0, 255));
+}
+
+QPushButton:pressed {
+    background-color: qlineargradient(spread:pad, x1:0.504, y1:0, x2:0.504, y2:0.981, stop:0 rgba(85, 0, 255, 255), stop:1 rgba(150, 0, 0, 255));
+}
+</string>
     </property>
     <property name="text">
      <string>+10</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_5">
+   <widget class="QPushButton" name="pushButton_9">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>179</y>
-      <width>51</width>
-      <height>31</height>
+      <x>440</x>
+      <y>590</y>
+      <width>93</width>
+      <height>28</height>
      </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>9</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(85, 0, 255);
-background-color: rgb(255, 0, 0);
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>+100</string>
+     <string>GERENCIAR</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_6">
+   <widget class="QLabel" name="label_9">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>179</y>
-      <width>51</width>
-      <height>31</height>
+      <x>100</x>
+      <y>-20</y>
+      <width>361</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>9</pointsize>
+      <family>Candara</family>
+      <pointsize>22</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(85, 0, 255);
-background-color: rgb(255, 0, 0);
-color: rgb(255, 255, 255);</string>
+     <string notr="true">color: rgb(85, 0, 0);</string>
     </property>
     <property name="text">
-     <string>+1000</string>
+     <string>Cadastro de Dívida / Despesa</string>
     </property>
    </widget>
   </widget>

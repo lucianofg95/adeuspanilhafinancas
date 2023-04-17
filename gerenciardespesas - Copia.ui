@@ -13,9 +13,6 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true">background-color: rgb(32, 178, 170);</string>
-  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
@@ -41,6 +38,9 @@
     <property name="sortingEnabled">
      <bool>true</bool>
     </property>
+    <property name="columnCount">
+     <number>6</number>
+    </property>
     <attribute name="horizontalHeaderVisible">
      <bool>true</bool>
     </attribute>
@@ -49,7 +49,7 @@
     </attribute>
     <column>
      <property name="text">
-      <string>NOME BANCO</string>
+      <string>DESPESA</string>
      </property>
      <property name="font">
       <font>
@@ -60,7 +60,7 @@
     </column>
     <column>
      <property name="text">
-      <string>DÉBITO</string>
+      <string>DATA CADASTRO</string>
      </property>
      <property name="font">
       <font>
@@ -71,7 +71,7 @@
     </column>
     <column>
      <property name="text">
-      <string>CRÉDITO</string>
+      <string>VALOR</string>
      </property>
      <property name="font">
       <font>
@@ -82,7 +82,7 @@
     </column>
     <column>
      <property name="text">
-      <string>LIMITE CREDITO</string>
+      <string>ANO</string>
      </property>
      <property name="font">
       <font>
@@ -91,6 +91,12 @@
       </font>
      </property>
     </column>
+    <column>
+     <property name="text">
+      <string>MÊS</string>
+     </property>
+    </column>
+    <column/>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
@@ -110,7 +116,7 @@
      </font>
     </property>
     <property name="text">
-     <string>BANCOS CADASTRADOS:</string>
+     <string>DESPESAS CADASTRADAS</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton">

@@ -1,3 +1,5 @@
+import time
+
 from PyQt5 import uic, QtWidgets
 import mysql.connector
 from datetime import datetime, date
@@ -91,6 +93,15 @@ def execbombobox2():
         cadastrarc.comboBox.addItem(bancof)
         i += 1
 
+def execbombobox3():
+    cursor1 = banco.cursor()
+    cursor1.execute("select nomebanco from contabanco")
+    bancos = cursor1.fetchall()
+    for i in range(len(bancos)):
+        bancof = bancos[i][0]
+        gerenciarcompras.comboBox_3.addItem(bancof)
+        i += 1
+
 def cadastrob():
     cadastrobanco.show()
 
@@ -147,6 +158,7 @@ def painel():
     insertYearBD()
     execbombobox()
     cadastro_despesa.dateEdit.setDate(QDate.currentDate())
+    cadastro_despesa.lineEdit_3.setText("0")
 
 
 def gerenciarbancos():
@@ -171,6 +183,63 @@ def gerenciarbancos():
 
             listarbancos.tableWidget.setItem(i,j,QtWidgets.QTableWidgetItem(str(celula)))
 
+def gerenciar_despesas():
+    gerenciardespesas.show()
+    cursor = banco.cursor()
+    comandosql = "SELECT nome, data, valor FROM dividafixa "
+    cursor.execute(comandosql)
+    dadoslidos = cursor.fetchall()
+
+    gerenciardespesas.tableWidget.setRowCount(len(dadoslidos))
+    gerenciardespesas.tableWidget.setColumnCount(5)
+
+    for i in range(0,len(dadoslidos)):
+        for j in range(0,3):
+            celula = dadoslidos[i][j]
+
+            gerenciardespesas.tableWidget.setItem(i,j,QtWidgets.QTableWidgetItem(str(celula)))
+
+def gerenciar_compras():
+    gerenciarcompras.show()
+    gerenciarcompras.label_Ano.setText(paineldecontrole.lineEditAno.text())
+    cursor = banco.cursor()
+    comandosql = "SELECT c.produtoservico,cb.nomebanco as contabanco, c.valor, m.nome as mes, a.numeroano as ano FROM cartaofatura c JOIN mes m ON c.idmes = m.id JOIN ano a ON m.idano = a.idano JOIN contabanco cb on c.idbanco = cb.id"
+    cursor.execute(comandosql)
+    dadoslidos = cursor.fetchall()
+    execbombobox3()
+    gerenciarcompras.tableWidget.setRowCount(len(dadoslidos))
+    gerenciarcompras.tableWidget.setColumnCount(5)
+
+    for i in range(0,len(dadoslidos)):
+        for j in range(0,5):
+            celula = dadoslidos[i][j]
+
+            gerenciarcompras.tableWidget.setItem(i,j,QtWidgets.QTableWidgetItem(str(celula)))
+
+def filtrar_compras():
+    gerenciarcompras.tableWidget.clearContents()
+    year = gerenciarcompras.label_Ano.text()
+    mes = gerenciarcompras.comboBox_2.currentText()
+    contabanco = gerenciarcompras.comboBox_3.currentText()
+    cursor = banco.cursor()
+    comandosql2 = "SELECT c.produtoservico, cb.nomebanco as contabanco, c.valor, m.nome as mes, a.numeroano as ano FROM cartaofatura c JOIN mes m ON c.idmes = m.id JOIN ano a ON m.idano = a.idano JOIN contabanco cb ON c.idbanco = cb.id WHERE m.nome = '"+ mes + "' AND cb.nomebanco = '" + contabanco + "' AND a.numeroano = '" + year + "'"
+    cursor.execute(comandosql2)
+    dadoslidos2 = cursor.fetchall()
+    gerenciarcompras.tableWidget.setRowCount(len(dadoslidos2))
+    gerenciarcompras.tableWidget.setColumnCount(5)
+
+    for i in range(0,len(dadoslidos2)):
+        for j in range(0,5):
+            celula = dadoslidos2[i][j]
+            gerenciarcompras.tableWidget.setItem(i,j,QtWidgets.QTableWidgetItem(str(celula)))
+
+    comandosql3 = "SELECT SUM(valor) FROM cartaofatura c JOIN mes m ON c.idmes = m.id JOIN ano a ON m.idano = a.idano JOIN contabanco cb ON c.idbanco = cb.id WHERE m.nome = '"+ mes + "' AND cb.nomebanco = '" + contabanco + "' AND a.numeroano = '" + year + "'"
+
+    cursor.execute(comandosql3)
+    dadoslidos3 = cursor.fetchall()
+    soma = dadoslidos3[0][0]
+    gerenciarcompras.label_3.setText("R$ " + str(soma))
+
 def excluirbanco():
     cursor = banco.cursor()
     linha = listarbancos.tableWidget.currentRow()
@@ -190,9 +259,24 @@ def excluirbanco():
     else:
         print("Ocorreu um erro no comando!")
 
+def excluir_despesa():
+    cursor = banco.cursor()
+    linha = gerenciardespesas.tableWidget.currentRow()
+
+    cursor.execute("select id from dividafixa")
+    dadoslidos = cursor.fetchall()
+    valorid = dadoslidos[linha][0]
+    listarbancos.tableWidget.removeRow(linha)
+    cursor.execute("delete from dividafixa where id = " + str(valorid))
+    banco.commit()
+    gerenciardespesas.tableWidget.removeRow(linha)
+
 
 def showcadastrarcompras():
     cadastrarc.show()
+    cadastrarc.dateEdit.setDate(QDate.currentDate())
+    cadastrarc.lineEdit_3.setText("0")
+    cadastrarc.lineEdit_4.setText("1")
     cadastrarc.label_Ano.setText(paineldecontrole.lineEditAno.text())
     insertYearBD()
     execbombobox2()
@@ -206,8 +290,9 @@ def cadastrarcompras():
     idb = cursor.fetchall()
     idbanco = (str(idb).strip('[]'',''()'))
     descricao = cadastrarc.lineEdit.text()
-    data = cadastrarc.lineEdit_2.text()
-    data = datetime.strptime(data, "%d/%m/%Y"). date()
+
+    data_texto = cadastrarc.dateEdit.text()
+    data = datetime.strptime(data_texto, "%d/%m/%Y").date()
     datatex = str(data)
     valor = cadastrarc.lineEdit_3.text()
     parcela01 = cadastrarc.lineEdit_4.text()
@@ -240,7 +325,6 @@ def cadastrarcompras():
         parcelames += 1
 
     cadastrarc.lineEdit.setText("")
-    cadastrarc.lineEdit_2.setText("")
     cadastrarc.lineEdit_3.setText("")
     cadastrarc.lineEdit_4.setText("")
 
@@ -299,9 +383,17 @@ def insertYearBD():
     else:
         print("Ano já está inserido no banco de dados")
 
-def mais1():
-    f = int(cadastrar_despesa.lineEdit_3.text())+1
-    cadastro_despesa.lineEdit_3.setText(f)
+def incrementar_valor(n):
+    numero = int(cadastro_despesa.lineEdit_3.text() or "0")
+    cadastro_despesa.lineEdit_3.setText(str(numero+n))
+
+def incrementar_valor_compra(n):
+    numero = int(cadastrarc.lineEdit_3.text() or "0")
+    cadastrarc.lineEdit_3.setText(str(numero+n))
+
+def incrementar_valor_compra_parcelas(n):
+    numero = int(cadastrarc.lineEdit_4.text() or "1")
+    cadastrarc.lineEdit_4.setText(str(numero+n))
 
 app = QtWidgets.QApplication([])
 
@@ -310,18 +402,36 @@ paineldecontrole = uic.loadUi("paineldecontrole.ui")
 cadastrobanco = uic.loadUi("cadastrobanco.ui")
 listarbancos = uic.loadUi("listarbancos.ui")
 cadastrarc = uic.loadUi("cadastarcompras.ui")
+gerenciardespesas = uic.loadUi("gerenciardespesas.ui")
+gerenciarcompras = uic.loadUi("gerenciarcompras.ui")
 paineldecontrole.pushButton_11.clicked.connect(painel)
 cadastro_despesa.pushButton.clicked.connect(cadastrar_despesa)
 cadastro_despesa.checkBox_13.clicked.connect(selecionartodos)
 cadastro_despesa.pushButton_2.clicked.connect(sair)
+cadastro_despesa.pushButton_9.clicked.connect(gerenciar_despesas)
+cadastrarc.pushButton_9.clicked.connect(gerenciar_compras)
 paineldecontrole.pushButton_2.clicked.connect(cadastrob)
 paineldecontrole.pushButton_4.clicked.connect(sair_2)
 cadastrobanco.pushButton.clicked.connect(cadastrarbanco)
 cadastrobanco.pushButton_2.clicked.connect(fecharcadastrobanco)
 cadastrobanco.pushButton_3.clicked.connect(gerenciarbancos)
 listarbancos.pushButton.clicked.connect(excluirbanco)
+gerenciardespesas.pushButton.clicked.connect(excluir_despesa)
 paineldecontrole.pushButton_12.clicked.connect(showcadastrarcompras)
-cadastro_despesa.pushButton_3.clicked.connect(mais1)
+gerenciarcompras.pushButton_2.clicked.connect(filtrar_compras)
+
+
+cadastro_despesa.pushButton_3.clicked.connect(lambda: incrementar_valor(1))
+cadastro_despesa.pushButton_4.clicked.connect(lambda: incrementar_valor(10))
+cadastro_despesa.pushButton_5.clicked.connect(lambda: incrementar_valor(100))
+cadastro_despesa.pushButton_6.clicked.connect(lambda: incrementar_valor(1000))
+
+cadastrarc.pushButton_3.clicked.connect(lambda: incrementar_valor_compra(1))
+cadastrarc.pushButton_4.clicked.connect(lambda: incrementar_valor_compra(10))
+cadastrarc.pushButton_5.clicked.connect(lambda: incrementar_valor_compra(100))
+cadastrarc.pushButton_6.clicked.connect(lambda: incrementar_valor_compra(1000))
+cadastrarc.pushButton_7.clicked.connect(lambda: incrementar_valor_compra_parcelas(1))
+cadastrarc.pushButton_8.clicked.connect(lambda: incrementar_valor_compra_parcelas(10))
 
 cadastrarc.pushButton.clicked.connect(cadastrarcompras)
 cadastrarc.pushButton_2.clicked.connect(fecharcadastrarcompras)

@@ -49,7 +49,7 @@
     </attribute>
     <column>
      <property name="text">
-      <string>NOME BANCO</string>
+      <string>DESPESA</string>
      </property>
      <property name="font">
       <font>
@@ -60,7 +60,7 @@
     </column>
     <column>
      <property name="text">
-      <string>DÉBITO</string>
+      <string>DATA DO CADASTRO</string>
      </property>
      <property name="font">
       <font>
@@ -71,7 +71,7 @@
     </column>
     <column>
      <property name="text">
-      <string>CRÉDITO</string>
+      <string>VALOR</string>
      </property>
      <property name="font">
       <font>
@@ -82,13 +82,18 @@
     </column>
     <column>
      <property name="text">
-      <string>LIMITE CREDITO</string>
+      <string>ANO</string>
      </property>
      <property name="font">
       <font>
        <weight>75</weight>
        <bold>true</bold>
       </font>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>MÊS</string>
      </property>
     </column>
    </widget>

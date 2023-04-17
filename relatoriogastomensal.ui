@@ -21,9 +21,9 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>50</y>
+      <y>80</y>
       <width>531</width>
-      <height>601</height>
+      <height>571</height>
      </rect>
     </property>
     <property name="font">
@@ -42,14 +42,14 @@
      <bool>true</bool>
     </property>
     <attribute name="horizontalHeaderVisible">
-     <bool>true</bool>
+     <bool>false</bool>
     </attribute>
     <attribute name="horizontalHeaderCascadingSectionResizes">
      <bool>false</bool>
     </attribute>
     <column>
      <property name="text">
-      <string>NOME BANCO</string>
+      <string>NOME</string>
      </property>
      <property name="font">
       <font>
@@ -60,7 +60,7 @@
     </column>
     <column>
      <property name="text">
-      <string>DÉBITO</string>
+      <string>DATA</string>
      </property>
      <property name="font">
       <font>
@@ -71,18 +71,7 @@
     </column>
     <column>
      <property name="text">
-      <string>CRÉDITO</string>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>LIMITE CREDITO</string>
+      <string>VALOR</string>
      </property>
      <property name="font">
       <font>
@@ -98,7 +87,7 @@
       <x>70</x>
       <y>0</y>
       <width>451</width>
-      <height>51</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="font">
@@ -110,7 +99,7 @@
      </font>
     </property>
     <property name="text">
-     <string>BANCOS CADASTRADOS:</string>
+     <string>RELATÓRIO GASTOS MENSAIS</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton">
@@ -136,6 +125,37 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>EXCLUIR</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>451</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial Black</family>
+      <pointsize>16</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>SELECIONE O MÊS:</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>40</y>
+      <width>191</width>
+      <height>22</height>
+     </rect>
     </property>
    </widget>
   </widget>

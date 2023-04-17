@@ -1,5 +1,6 @@
 from PyQt5 import uic, QtWidgets
 import mysql.connector
+import cadastrodivida
 
 banco=  mysql.connector.connect(
     host="localhost",
@@ -23,7 +24,7 @@ def chama_tela_logado():
 
     if senhabd[0][0] == senha:
         primeiratela.close()
-        logado.show()
+        cadastrodivida.paineldecontrole.show()
     else:
         primeiratela.label_4.setText("Dados de login incorretos!")
 
@@ -68,6 +69,7 @@ logado.pushButton.clicked.connect(logout)
 primeiratela.lineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
 primeiratela.pushButton_2.clicked.connect(telecadastro)
 telacadastro.pushButton.clicked.connect(cadastrar)
+
 
 
 primeiratela.show()
